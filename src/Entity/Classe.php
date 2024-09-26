@@ -19,6 +19,9 @@ class Classe
     #[ORM\Column(nullable: true)]
     private ?int $studentNb = null;
 
+    #[ORM\Column]
+    private ?int $place_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,24 @@ class Classe
     public function setStudentNb(?int $studentNb): static
     {
         $this->studentNb = $studentNb;
+
+        return $this;
+    }
+
+    #[Route('/classe/{id}', name: 'classe_show', methods: ['GET'])]
+    public function show(Classe $classe): Response
+    {
+        return $this->render('classe/show.html.twig', ['classe' => $classe]);
+    }
+
+    public function getPlaceId(): ?int
+    {
+        return $this->place_id;
+    }
+
+    public function setPlaceId(int $place_id): static
+    {
+        $this->place_id = $place_id;
 
         return $this;
     }

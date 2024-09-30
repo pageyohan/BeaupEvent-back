@@ -40,6 +40,7 @@ services:
       start_period: 60s
     volumes:
       - database_data:/var/lib/mysql:rw
+      - ./docker/db/data:/var/lib/mysql:rw
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

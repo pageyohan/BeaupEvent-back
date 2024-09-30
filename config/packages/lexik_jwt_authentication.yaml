@@ -1,0 +1,6 @@
+lexik_jwt_authentication:
+    secret_key: '%kernel.project_dir%/config/jwt/private.pem'  # Clé privée
+    public_key: '%kernel.project_dir%/config/jwt/public.pem'   # Clé publique
+    pass_phrase: '%env(JWT_PASSPHRASE)%'  # Phrase de passe de la clé privée
+    user_id_claim: email  # Claim à utiliser pour l'identifiant de l'utilisateur
+    token_ttl: 3600  # Durée de validité du token (en secondes)

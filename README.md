@@ -29,16 +29,18 @@ Les principales technologies et outils utilisés pour la partie back-end de Beau
 
     Cloner le dépôt :
 
-    bash
+```bash
 
 git clone https://github.com/pageyohan/BeaupEvent-back.git
 cd BeaupEvent-back
+```
 
 Installer les dépendances :
 
-bash
+```bash
 
 docker compose build
+```
 
 ## ⚙️ Variables d'environnement
 
@@ -60,9 +62,11 @@ docker compose exec php sh -c '
 
 Lancer le serveur :
 
-bash
+```bash
 
-    docker compose up (ou docker compose up -d pour garder la main dans le bash)
+    docker compose up
+```
+ou docker compose up -d pour garder la main dans le shell
 
 ## ✨ Fonctionnalités à venir
 

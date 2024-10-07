@@ -1,51 +1,74 @@
-# Symfony Docker
+# Beaup'Events - Back-End
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
+Bienvenue dans le dépôt du back-end du projet Beaup'Events ! 🚀
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+Ce projet a été développé pour l'institution Beaupeyrat, et a pour objectif de simplifier et d'améliorer la gestion des événements au sein de l'établissement.
+## 🏗️ Structure du Projet
 
-## Getting Started
+Ce dépôt contient l'API et la logique back-end de Beaup'Events. Il est responsable de :
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --no-cache` to build fresh images
-3. Run `docker compose up --pull always -d --wait` to set up and start a fresh Symfony project
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+    La gestion des utilisateurs (administrateurs, organisateurs, participants).
+    La création, modification et suppression des événements.
+    La gestion des inscriptions et des interactions liées aux événements.
+    La sécurité et l'authentification des utilisateurs.
 
-## Features
+## 🚀 Front-End
 
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
+Le front-end, qui permet aux utilisateurs d'interagir avec l'application de manière intuitive, est hébergé dans un autre dépôt. Le lien vers le dépôt front-end sera ajouté ici prochainement !
 
-**Enjoy!**
+[Lien vers le dépôt Front-End]
+## 📦 Technologies utilisées
 
-## Docs
+Les principales technologies et outils utilisés pour la partie back-end de Beaup'Events sont :
 
-1. [Options available](docs/options.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using MySQL instead of PostgreSQL](docs/mysql.md)
-8. [Using Alpine Linux instead of Debian](docs/alpine.md)
-9. [Using a Makefile](docs/makefile.md)
-10. [Updating the template](docs/updating.md)
-11. [Troubleshooting](docs/troubleshooting.md)
+    Symfony pour la gestion des données et la création d'API avec API Platform
+    JWT (JSON Web Token) pour la gestion des sessions et la sécurité.
+    Tests unitaires et intégration avec PHPUnit.
 
-## License
+## 🛠️ Installation et Utilisation
 
-Symfony Docker is available under the MIT License.
+    Cloner le dépôt :
 
-## Credits
+    bash
 
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+git clone https://github.com/pageyohan/BeaupEvent-back.git
+cd BeaupEvent-back
+
+Installer les dépendances :
+
+bash
+
+docker compose build
+
+## ⚙️ Variables d'environnement
+
+Le projet **Beaup'Events** utilise des variables d'environnement pour configurer la base de données, les clés JWT, etc. Voici les instructions pour générer les clés JWT nécessaires à l'authentification.
+
+### 🗝️ Clés JWT
+
+Pour générer les clés JWT (privée et publique) et configurer les permissions correctement, exécutez la commande suivante via Docker :
+
+```bash
+docker compose exec php sh -c '
+    set -e
+    apt-get install openssl
+    php bin/console lexik:jwt:generate-keypair
+    setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+    setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+'
+``` 
+
+Lancer le serveur :
+
+bash
+
+    docker compose up (ou docker compose up -d pour garder la main dans le bash)
+
+## ✨ Fonctionnalités à venir
+
+    Intégration avec le système de notifications pour les événements à venir.
+    Génération de rapports d'événements.
+    Améliorations au niveau de la gestion des rôles d'utilisateurs.
+
+
+🎉 Merci de votre intérêt pour Beaup'Events ! Nous espérons que ce projet vous sera utile. Pour toute question ou suggestion, n'hésitez pas à nous contacter.

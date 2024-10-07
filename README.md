@@ -6,11 +6,13 @@ Ce projet a été développé pour l'institution Beaupeyrat, et a pour objectif 
 ## 🏗️ Structure du Projet
 
 Ce dépôt contient l'API et la logique back-end de Beaup'Events. Il est responsable de :
+**La gestion des utilisateurs (administrateurs, organisateurs, participants).**
 
-    La gestion des utilisateurs (administrateurs, organisateurs, participants).
-    La création, modification et suppression des événements.
-    La gestion des inscriptions et des interactions liées aux événements.
-    La sécurité et l'authentification des utilisateurs.
+**La création, modification et suppression des événements.**
+
+**La gestion des inscriptions et des interactions liées aux événements.**
+
+**La sécurité et l'authentification des utilisateurs.**
 
 ## ⚙️ Gestion de Projet
 
@@ -35,16 +37,16 @@ Le front-end, qui permet aux utilisateurs d'interagir avec l'application de mani
 
 Les principales technologies et outils utilisés pour la partie back-end de Beaup'Events sont :
 
-    Symfony pour la gestion des données et la création d'API avec API Platform
-    JWT (JSON Web Token) pour la gestion des sessions et la sécurité.
-    Tests unitaires et intégration avec PHPUnit.
+**Symfony pour la gestion des données et la création d'API avec API Platform**
+
+**JWT (JSON Web Token) pour la gestion des sessions et la sécurité.**
+
+**Tests unitaires et intégration avec PHPUnit.**
 
 ## 🛠️ Installation et Utilisation
 Cloner le dépôt :
 
-
 ```bash
-
 git clone https://github.com/pageyohan/BeaupEvent-back.git
 cd BeaupEvent-back
 ```
@@ -52,7 +54,6 @@ cd BeaupEvent-back
 Installer les dépendances :
 
 ```bash
-
 docker compose build
 ```
 
@@ -77,16 +78,15 @@ docker compose exec php sh -c '
 Lancer le serveur :
 
 ```bash
-
-    docker compose up
+docker compose up
 ```
 ou docker compose up -d pour garder la main dans le shell
 
 ## ✨ Fonctionnalités à venir
 
-    Intégration avec le système de notifications pour les événements à venir.
-    Génération de rapports d'événements.
-    Améliorations au niveau de la gestion des rôles d'utilisateurs.
+Intégration avec le système de notifications pour les événements à venir.
+Génération de rapports d'événements.
+Améliorations au niveau de la gestion des rôles d'utilisateurs.
 
 
-🎉 Merci de votre intérêt pour Beaup'Events ! Nous espérons que ce projet vous sera utile. Pour toute question ou suggestion, n'hésitez pas à nous contacter.
+**🎉 Merci de votre intérêt pour Beaup'Events ! Nous espérons que ce projet vous sera utile. Pour toute question ou suggestion, n'hésitez pas à nous contacter.**

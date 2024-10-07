@@ -1,11 +1,24 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use App\Repository\ClasseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
+#[ApiResource(
+    security: "is_granted('ROLE_USER')",
+    operations: [
+        new Get(security: "is_granted('ROLE_USER')"),
+        new Put(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
+        new Post(security: "is_granted('ROLE_USER')"),
+    ]
+)]
 class Classe
 {
     #[ORM\Id]

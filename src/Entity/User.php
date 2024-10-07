@@ -16,14 +16,14 @@ use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Un compte utilise déjà cette adresse email.')]
 #[ApiResource(
-    security: "is_granted('ROLE_USER')",  // Sécurise globalement la ressource
+    security: "is_granted('ROLE_USER')",
     operations: [
-        new Get(security: "is_granted('ROLE_USER')"), // Lecture d'un élément
-        new Put(security: "is_granted('ROLE_ADMIN')"), // Modification d'un élément
-        new Delete(security: "is_granted('ROLE_ADMIN')"), // Suppression d'un élément
-        new Post(security: "is_granted('ROLE_USER')"), // Création d'un élément
+        new Get(security: "is_granted('ROLE_USER')"),
+        new Put(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
+        new Post(security: "is_granted('ROLE_USER')"),
     ]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface

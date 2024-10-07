@@ -26,8 +26,8 @@ Les principales technologies et outils utilisés pour la partie back-end de Beau
     Tests unitaires et intégration avec PHPUnit.
 
 ## 🛠️ Installation et Utilisation
+Cloner le dépôt :
 
-    Cloner le dépôt :
 
 ```bash
 

@@ -32,7 +32,6 @@ Cela permet de garantir un développement fluide et structuré, avec une bonne v
 
 Le front-end, qui permet aux utilisateurs d'interagir avec l'application de manière intuitive, est hébergé dans un autre dépôt. Le lien vers le dépôt front-end sera ajouté ici prochainement !
 
-[Lien vers le dépôt Front-End]
 ## 📦 Technologies utilisées
 
 Les principales technologies et outils utilisés pour la partie back-end de Beaup'Events sont :

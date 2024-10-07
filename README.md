@@ -12,6 +12,20 @@ Ce dépôt contient l'API et la logique back-end de Beaup'Events. Il est respons
     La gestion des inscriptions et des interactions liées aux événements.
     La sécurité et l'authentification des utilisateurs.
 
+## ⚙️ Gestion de Projet
+
+Ce projet a été géré de manière agile, en utilisant **Trello** pour organiser les tâches, suivre les progrès et gérer les priorités. Le tableau Trello du projet est accessible pour visualiser l'ensemble des fonctionnalités, les étapes du développement, ainsi que les objectifs futurs.
+
+[Lien vers le Trello](https://trello.com/invite/b/66e0561d67ed8f73e6467bc4/ATTI6b33391d1f17f29bd0d55b837d82225c6C1CC411/beaupevents)
+
+La gestion de projet inclut :
+- La priorisation des fonctionnalités.
+- Le suivi des bugs et améliorations.
+- La documentation des étapes clés du développement.
+
+Cela permet de garantir un développement fluide et structuré, avec une bonne visibilité sur l'avancement des tâches.
+
+
 ## 🚀 Front-End
 
 Le front-end, qui permet aux utilisateurs d'interagir avec l'application de manière intuitive, est hébergé dans un autre dépôt. Le lien vers le dépôt front-end sera ajouté ici prochainement !

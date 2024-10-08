@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use App\Repository\UserRepository;
+use App\Repository\EventRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,27 +17,60 @@ use App\Entity\Student;
 
 class DashboardController extends AbstractDashboardController
 {
+    private $userRepository;
+    private $eventRepository;
+
+    public function __construct(UserRepository $userRepository, EventRepository $eventRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->eventRepository = $eventRepository;
+    }
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        // return parent::index();
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        return $this->render('admin/dashboard.html.twig');
+        // Retrieve total number of users and events
+        $nbUsers = $this->userRepository->count([]);
+        $nbTotalEvents = $this->eventRepository->count([]);
+        $nbPublicEvents = $this->eventRepository->count(['private' => false]); // Count public events
+        $nbPrivateEvents = $this->eventRepository->count(['private' => true]); // Count private events
+    
+        // Retrieve the number of registered users per month
+        $usersByMonth = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $startDate = (new \DateTime())->setDate((new \DateTime())->format('Y'), $i, 1);
+            $endDate = (new \DateTime())->setDate((new \DateTime())->format('Y'), $i + 1, 1);
+            
+            $usersByMonth[$i] = $this->userRepository->createQueryBuilder('u')
+                ->select('COUNT(u.id)')
+                ->where('u.registrationDate >= :start')
+                ->andWhere('u.registrationDate < :end')
+                ->setParameter('start', $startDate)
+                ->setParameter('end', $endDate)
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+        // Render the template and pass the statistics to the view
+        return $this->render('admin/dashboard.html.twig', [
+            'nbUsers' => $nbUsers,
+            'nbTotalEvents' => $nbTotalEvents,
+            'nbPublicEvents' => $nbPublicEvents,
+            'nbPrivateEvents' => $nbPrivateEvents,
+            'nbUsersJan' => $usersByMonth[1] ?? 0,
+            'nbUsersFeb' => $usersByMonth[2] ?? 0,
+            'nbUsersMar' => $usersByMonth[3] ?? 0,
+            'nbUsersApr' => $usersByMonth[4] ?? 0,
+            'nbUsersMay' => $usersByMonth[5] ?? 0,
+            'nbUsersJun' => $usersByMonth[6] ?? 0,
+            'nbUsersJul' => $usersByMonth[7] ?? 0,
+            'nbUsersAug' => $usersByMonth[8] ?? 0,
+            'nbUsersSep' => $usersByMonth[9] ?? 0,
+            'nbUsersOct' => $usersByMonth[10] ?? 0,
+            'nbUsersNov' => $usersByMonth[11] ?? 0,
+            'nbUsersDec' => $usersByMonth[12] ?? 0,
+        ]);
     }
+    
 
     public function configureDashboard(): Dashboard
     {

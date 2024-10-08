@@ -1,20 +1,77 @@
-{# templates/admin/my-custom-page.html.twig #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content_title %}The Title of the Page{% endblock %}
-{% block page_actions %}
-    <a class="btn btn-primary" href="...">Some Action</a>
-{% endblock %}
+{% block content_title %}Bienvenue dans le Dashboard de Beaup'Event{% endblock %}
 
 {% block main %}
-    <table class="datagrid">
-        <thead>
-            <tr>
-                <td>Some Column</td>
-                <td>Another Column</td>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Répartition des événements</h5>
+            <div class="chart-container">
+                <canvas id="eventChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>Utilisateurs inscrits par mois</h5>
+            <div class="chart-container">
+                <canvas id="userRegistrationChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Pie chart for distribution of events
+        var ctxEvent = document.getElementById('eventChart').getContext('2d');
+        var eventChart = new Chart(ctxEvent, {
+            type: 'pie',
+            data: {
+                labels: ['Événements publics', 'Événements privés', 'Total d\'événements'],
+                datasets: [{
+                    label: 'Répartition des événements',
+                    data: [{{ nbPublicEvents }}, {{ nbPrivateEvents }}, {{ nbTotalEvents }}], // Remplace avec tes valeurs
+                    backgroundColor: ['#2ecc71', '#e74c3c', '#3498db'],
+                    hoverBackgroundColor: ['#27ae60', '#c0392b', '#2980b9']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+
+        // Bar chart for registered users by month
+        var ctxUserReg = document.getElementById('userRegistrationChart').getContext('2d');
+        var userRegistrationChart = new Chart(ctxUserReg, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+                datasets: [{
+                    label: 'Utilisateurs inscrits',
+                    data: [{{ nbUsersJan }}, {{ nbUsersFeb }}, {{ nbUsersMar }}, {{ nbUsersApr }}, {{ nbUsersMay }}, {{ nbUsersJun }}, {{ nbUsersJul }}, {{ nbUsersAug }}, {{ nbUsersSep }}, {{ nbUsersOct }}, {{ nbUsersNov }}, {{ nbUsersDec }}],
+                    backgroundColor: '#3498db',
+                    borderColor: '#2980b9',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}

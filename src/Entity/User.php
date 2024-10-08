@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $active = null;
+    private ?\DateTimeInterface $registrationDate = null; // Date d'inscription
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $inactive = null;
@@ -145,14 +145,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getActive(): ?\DateTimeInterface
+    public function getRegistrationDate(): ?\DateTimeInterface
     {
-        return $this->active;
+        return $this->registrationDate;
     }
 
-    public function setActive(\DateTimeInterface $active): static
+    public function setRegistrationDate(\DateTimeInterface $registrationDate): static
     {
-        $this->active = $active;
+        $this->registrationDate = $registrationDate;
 
         return $this;
     }
@@ -186,7 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->student;
     }
 
-    public function setStudent(Student $student): static
+    public function setStudent(?Student $student): static
     {
         $this->student = $student;
 
